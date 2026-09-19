@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Irfan — Machine Learning Engineer &amp; Ph.D. Researcher</title>
+<meta name="description" content="Muhammad Irfan — Machine Learning Engineer and Ph.D. Researcher working across deep computer vision, industrial edge AI, and multi-modal medical imaging." />
+<meta name="author" content="Muhammad Irfan" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Muhammad Irfan — Machine Learning Engineer &amp; Ph.D. Researcher" />
+<meta property="og:description" content="Bridging deep computer vision, industrial edge AI (General Motors), and multi-modal medical imaging." />
+<meta property="og:image" content="assets/profile.jpg" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='system-ui' font-weight='700' fill='%234f46e5'>MI</text></svg>" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+        },
+        colors: {
+          brand: {
+            50:  '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+            400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+            800: '#3730a3', 900: '#312e81'
+          }
+        }
+      }
+    }
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  html { scroll-padding-top: 5rem; }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1, h2, h3 { text-wrap: balance; letter-spacing: -0.021em; }
+  p { text-wrap: pretty; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  .gradient-text {
+    background-image: linear-gradient(110deg, #4f46e5 0%, #0ea5e9 45%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, rgba(100,116,139,.13) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100,116,139,.13) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 45%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 45%, transparent 100%);
+  }
+
+  /* ---- Animated hero orbs ---- */
+  @keyframes orbDrift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33%      { transform: translate3d(34px, -42px, 0) scale(1.09); }
+    66%      { transform: translate3d(-28px, 26px, 0) scale(0.94); }
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(64px);
+    opacity: .28;
+    animation: orbDrift 26s ease-in-out infinite;
+    will-change: transform;
+  }
+  .dark .orb { opacity: .42; filter: blur(72px); }
+
+  .orb-1 {
+    top: -11rem; left: 50%; margin-left: -17rem;
+    height: 34rem; width: 34rem;
+    background: radial-gradient(circle, #6366f1 0%, rgba(99,102,241,0) 68%);
+  }
+  .orb-2 {
+    top: 3rem; right: -9rem;
+    height: 26rem; width: 26rem;
+    background: radial-gradient(circle, #0ea5e9 0%, rgba(14,165,233,0) 68%);
+    animation-duration: 33s; animation-delay: -7s;
+  }
+  .orb-3 {
+    bottom: -9rem; left: -7rem;
+    height: 25rem; width: 25rem;
+    background: radial-gradient(circle, #14b8a6 0%, rgba(20,184,166,0) 68%);
+    animation-duration: 29s; animation-delay: -14s;
+  }
+
+  /* ---- Mouse-tracking card spotlight + border glow ---- */
+  .card-spotlight { position: relative; isolation: isolate; }
+
+  .card-spotlight::before,
+  .card-spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+
+  /* glow wash behind the content */
+  .card-spotlight::before {
+    z-index: -1;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%),
+                rgba(99, 102, 241, .13), transparent 62%);
+  }
+  .dark .card-spotlight::before {
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%),
+                rgba(129, 140, 248, .18), transparent 62%);
+  }
+
+  /* 1px gradient border that follows the cursor */
+  .card-spotlight::after {
+    padding: 1px;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%),
+                rgba(99, 102, 241, .65), transparent 66%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+  }
+
+  .card-spotlight:hover::before,
+  .card-spotlight:hover::after { opacity: 1; }
+
+  .nav-link.active { color: #4f46e5; }
+  .dark .nav-link.active { color: #a5b4fc; }
+
+  ::selection { background: #c7d2fe; color: #1e1b4b; }
+  .dark ::selection { background: #4338ca; color: #eef2ff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .orb { animation: none; }
+  }
+</style>
+</head>
+
+<body class="bg-slate-50 text-slate-700 dark:bg-slate-950 dark:text-slate-300 font-sans antialiased">
+
+<a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+<!-- ============================ NAVIGATION ============================ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent">
+  <nav class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="flex h-16 items-center justify-between">
+
+      <a href="#hero" class="group flex items-center gap-2.5">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-sky-500 text-sm font-bold text-white shadow-lg shadow-brand-600/25">MI</span>
+        <span class="text-[15px] font-semibold tracking-tight text-slate-900 dark:text-white">Muhammad Irfan</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-5 lg:gap-6 text-[13.5px] font-medium">
+        <li><a href="#about"        class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">About</a></li>
+        <li><a href="#skills"       class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Skills</a></li>
+        <li><a href="#experience"   class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Experience</a></li>
+        <li><a href="#education"    class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Education</a></li>
+        <li><a href="#publications" class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Research</a></li>
+        <li><a href="#projects"     class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Projects</a></li>
+        <li><a href="#contact"      class="nav-link text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-white">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" type="button" aria-label="Toggle dark mode"
+                class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white/70 text-slate-600 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400 dark:hover:text-white">
+          <svg class="h-[18px] w-[18px] dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+          <svg class="hidden h-[18px] w-[18px] dark:block" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+        </button>
+
+        <button id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
+                class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white/70 text-slate-600 transition md:hidden dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
+          <svg id="icon-open" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+          <svg id="icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <ul class="space-y-1 rounded-2xl border border-slate-200 bg-white/95 p-2 text-sm font-medium shadow-xl backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
+        <li><a href="#about"        class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">About</a></li>
+        <li><a href="#skills"       class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Skills</a></li>
+        <li><a href="#experience"   class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Experience</a></li>
+        <li><a href="#education"    class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Education</a></li>
+        <li><a href="#publications" class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Research &amp; Service</a></li>
+        <li><a href="#projects"     class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Projects</a></li>
+        <li><a href="#contact"      class="mobile-link block rounded-xl px-4 py-2.5 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============================ HERO ============================ -->
+<section id="hero" class="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+  <div class="absolute inset-0 grid-backdrop"></div>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.35fr_1fr]">
+
+    <div class="reveal order-2 lg:order-1">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+          </span>
+          Ph.D. Defense Pending — Open to Collaboration
+        </span>
+
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
+          <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          Grand Blanc, MI
+        </span>
+
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
+          U.S. Permanent Resident — no sponsorship required
+        </span>
+      </div>
+
+      <h1 class="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl dark:text-white">
+        Muhammad <span class="gradient-text">Irfan</span>
+      </h1>
+
+      <p class="mt-4 text-lg font-semibold text-slate-800 sm:text-xl dark:text-slate-200">
+        Machine Learning Engineer &amp; Ph.D. Researcher
+        <span class="font-medium text-slate-500 dark:text-slate-400">(Defense Pending)</span>
+      </p>
+
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
+        Bridging deep computer vision, industrial edge AI (General Motors), and multi-modal medical imaging.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a href="https://scholar.google.com/citations?user=MfhBA7EAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100">
+          <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+          Google Scholar
+        </a>
+
+        <a href="https://www.linkedin.com/in/muhammad-irfan-cv/" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-white">
+          <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+
+        <a href="https://github.com/irfantahir301" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-white">
+          <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 007.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+          GitHub
+        </a>
+
+        <a href="mailto:irfantahir301@gmail.com"
+           class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-white">
+          <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          Email
+        </a>
+
+        <a href="assets/Muhammad_Irfan_CV.pdf" target="_blank" rel="noopener noreferrer" download
+           class="inline-flex items-center gap-2 rounded-xl border border-brand-500/40 bg-brand-50 px-5 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-500 hover:bg-brand-100 dark:border-brand-500/40 dark:bg-brand-500/10 dark:text-brand-300 dark:hover:bg-brand-500/20">
+          <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Download CV
+        </a>
+      </div>
+
+      <dl class="mt-12 grid max-w-lg grid-cols-3 gap-5 border-t border-slate-200 pt-8 dark:border-slate-800">
+        <div>
+          <dt class="tabular text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-count="251">251</dt>
+          <dd class="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Patients curated</dd>
+        </div>
+        <div>
+          <dt class="tabular text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-count="20" data-suffix="k+">20k+</dt>
+          <dd class="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Clinical images</dd>
+        </div>
+        <div>
+          <dt class="tabular text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-count="10" data-suffix="+">10+</dt>
+          <dd class="mt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Years in CV research</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Profile picture: replace assets/profile.jpg with your own photo -->
+    <div class="reveal order-1 flex justify-center lg:order-2 lg:justify-end">
+      <div class="relative">
+        <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-brand-500 via-sky-400 to-teal-400 opacity-20 blur-2xl"></div>
+        <div class="relative rounded-full bg-gradient-to-tr from-brand-600 via-sky-500 to-teal-400 p-[4px] shadow-2xl shadow-brand-600/20">
+          <img id="profile-photo"
+               src="assets/profile.jpg"
+               alt="Portrait of Muhammad Irfan"
+               width="288" height="288"
+               style="object-position: center 14%;"
+               class="h-56 w-56 rounded-full object-cover ring-4 ring-slate-50 sm:h-72 sm:w-72 dark:ring-slate-950" />
+          <div id="profile-fallback"
+               class="hidden h-56 w-56 place-items-center rounded-full bg-slate-100 text-5xl font-extrabold tracking-tight text-brand-600 ring-4 ring-slate-50 sm:h-72 sm:w-72 sm:text-6xl dark:bg-slate-900 dark:text-brand-300 dark:ring-slate-950">
+            MI
+          </div>
+        </div>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-semibold text-slate-700 shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+          University of Michigan-Flint
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section id="about" class="border-t border-slate-200 bg-white py-20 sm:py-24 dark:border-slate-800/80 dark:bg-slate-900/40">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">01 — About</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">About Me</h2>
+    </div>
+
+    <div class="reveal mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+      <div>
+        <p class="text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-400">
+          Ph.D. candidate at the <span class="font-semibold text-slate-900 dark:text-slate-200">University of Michigan-Flint</span>
+          specializing in computer vision, spatio-temporal deep learning, and multi-modal medical imaging. My work spans from
+          deploying real-time anomaly detection pipelines on edge hardware
+          (<span class="font-semibold text-slate-900 dark:text-slate-200">Jetson, TensorRT, ROS 2</span>) at
+          <span class="font-semibold text-slate-900 dark:text-slate-200">General Motors</span> to pioneering clinical brain
+          aneurysm detection algorithms in collaboration with neurosurgeons at
+          <span class="font-semibold text-slate-900 dark:text-slate-200">Henry Ford Health System</span>.
+        </p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Focus</p>
+          <p class="mt-1.5 text-sm font-semibold text-slate-800 dark:text-slate-200">Spatio-temporal deep learning &amp; 3D segmentation</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Deployment</p>
+          <p class="mt-1.5 text-sm font-semibold text-slate-800 dark:text-slate-200">Real-time edge AI on Jetson &amp; TensorRT</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Clinical</p>
+          <p class="mt-1.5 text-sm font-semibold text-slate-800 dark:text-slate-200">Neurosurgeon-validated aneurysm imaging</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SKILLS ============================ -->
+<section id="skills" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">02 — Skills</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Technical Toolkit</h2>
+    </div>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2">
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Computer Vision</h3>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Object Detection</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Image Classification</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Semantic Segmentation</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Feature Extraction</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Image Enhancement</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Motion Analysis</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">3D Imaging</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Camera &amp; Video Analytics</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Vision-Language Models</li>
+        </ul>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3V6.75a3 3 0 013-3h13.5a3 3 0 013 3v4.5a3 3 0 01-3 3m-13.5 0v2.25a3 3 0 003 3h7.5a3 3 0 003-3v-2.25M6.75 9h.008v.008H6.75V9z"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Edge AI &amp; Deployment</h3>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">NVIDIA Jetson Thor</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">TensorRT</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Real-Time Inference</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Embedded Systems</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Model Optimization</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">HW/SW Integration</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Latency/Accuracy Tradeoffs</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">PoC-to-Production</li>
+        </ul>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-sky-50 text-sky-600 dark:bg-sky-500/10 dark:text-sky-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Programming &amp; Frameworks</h3>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Python</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">MATLAB</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">PyTorch</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">TensorFlow</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Keras</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Scikit-learn</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">OpenCV</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">MONAI</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">NumPy</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Pandas</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Scikit-image</li>
+        </ul>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.4 14.4 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Models &amp; Methods</h3>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">CNNs</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">RNNs</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">GANs</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Transformers</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">UNet Variants</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">SegFormer</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">One-Shot &amp; Few-Shot Learning</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Federated Learning</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Multimodal Fusion</li>
+        </ul>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl sm:col-span-2 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Platforms &amp; Tools</h3>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">AWS</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Microsoft Azure</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Google Cloud Platform</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Git</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Visual Studio</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">DICOM</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">ITK</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">SimpleITK</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">VTK</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">VMTK</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">3D Slicer</li>
+          <li class="rounded-lg bg-slate-100 px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">Darwin Studio 7</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXPERIENCE ============================ -->
+<section id="experience" class="border-t border-slate-200 bg-white py-20 sm:py-24 dark:border-slate-800/80 dark:bg-slate-900/40">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">03 — Experience</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Professional Journey</h2>
+    </div>
+
+    <ol class="mt-12 space-y-10 border-l-2 border-slate-200 pl-7 sm:pl-10 dark:border-slate-800">
+
+      <li class="reveal relative">
+        <span class="absolute -left-[38px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-brand-600 ring-4 ring-white sm:-left-[50px] dark:ring-slate-900"></span>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Machine Learning Engineer</h3>
+          <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">Current</span>
+        </div>
+        <p class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-400">General Motors R&amp;D &nbsp;·&nbsp; Warren, MI &nbsp;·&nbsp; Jan 2026 – Present</p>
+        <ul class="mt-4 space-y-2.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Develop and deliver real-time computer vision and deep learning solutions end to end — requirements, data ingestion, training, validation, optimization, system integration, and production deployment.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Build CNN-, RNN-, and GAN-based models for complex image and signal data across feature extraction, classification, detection, and prediction workflows.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Optimize models with NVIDIA TensorRT and deploy inference workloads on NVIDIA Jetson Thor, balancing accuracy, latency, throughput, memory, and computational cost.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Design reproducible model and inference pipelines that move proof-of-concept systems toward scalable operational deployment.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Mentor 4–6 engineers, review technical designs and deliverables, and collaborate with cross-functional teams in the United States and India.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>Lead inventor on a GM U.S. provisional patent application and a separate confidential AI/ML innovation retained as a trade secret.</li>
+        </ul>
+      </li>
+
+      <li class="reveal relative">
+        <span class="absolute -left-[38px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-slate-300 ring-4 ring-white sm:-left-[50px] dark:bg-slate-700 dark:ring-slate-900"></span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Research Assistant</h3>
+        <p class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-400">SMILES Lab, University of Michigan-Flint &nbsp;·&nbsp; Flint, MI &nbsp;·&nbsp; Jan 2022 – Dec 2025</p>
+        <ul class="mt-4 space-y-2.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Built reproducible 3D computer vision pipelines for MRI, MRA, DSA, and clinical data — preprocessing, training, fine-tuning, validation, error analysis, and documentation.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Developed detection, segmentation, and risk-prediction models using CNNs, UNet variants, SegFormer, transformers, large vision models, vision-language models, and image-text-tabular fusion.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Applied one-shot, few-shot, and federated learning to improve generalization, data efficiency, and privacy across limited and distributed datasets.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Produced patented and peer-reviewed computer vision research through collaborations spanning the United States, Norway, the UAE, Pakistan, and South Korea.</li>
+        </ul>
+      </li>
+
+      <li class="reveal relative">
+        <span class="absolute -left-[38px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-slate-300 ring-4 ring-white sm:-left-[50px] dark:bg-slate-700 dark:ring-slate-900"></span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Teaching Assistant</h3>
+        <p class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-400">Oakland University, Computer Science Department &nbsp;·&nbsp; Rochester, MI &nbsp;·&nbsp; Sep 2023 – Apr 2025</p>
+        <ul class="mt-4 space-y-2.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Mentored students and supported instruction in data structures and algorithms, software engineering, computer networks, C/UNIX programming, and engineering problem solving.</li>
+        </ul>
+      </li>
+
+      <li class="reveal relative">
+        <span class="absolute -left-[38px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-slate-300 ring-4 ring-white sm:-left-[50px] dark:bg-slate-700 dark:ring-slate-900"></span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Research Assistant</h3>
+        <p class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-400">Mixed Reality &amp; Interaction Lab, Sejong University &nbsp;·&nbsp; Seoul, South Korea &nbsp;·&nbsp; Sep 2018 – May 2021</p>
+        <ul class="mt-4 space-y-2.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Designed and evaluated deep learning systems for image enhancement, dehazing, object detection, segmentation, saliency detection, motion estimation, image-quality assessment, and sensor-based activity recognition.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Developed CNN-based perception and tracking methods for 360-degree video and immersive industrial environments, including field-of-view selection and abnormal-activity detection.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Built experimentation and data pipelines, optimized models for accuracy and computational efficiency, and contributed to granted patents and peer-reviewed publications.</li>
+        </ul>
+      </li>
+
+      <li class="reveal relative">
+        <span class="absolute -left-[38px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-slate-300 ring-4 ring-white sm:-left-[50px] dark:bg-slate-700 dark:ring-slate-900"></span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Research Assistant</h3>
+        <p class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-400">Digital Image Processing Lab, Islamia College University &nbsp;·&nbsp; Peshawar, Pakistan &nbsp;·&nbsp; Jun 2016 – Jul 2018</p>
+        <ul class="mt-4 space-y-2.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Developed a real-time CNN-assisted autonomous-driving prototype on Raspberry Pi, integrating computer vision models with resource-constrained embedded hardware.</li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>Implemented and optimized lightweight motion-detection and image-enhancement models for real-time edge applications.</li>
+        </ul>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ EDUCATION ============================ -->
+<section id="education" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">04 — Education</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Academic Background</h2>
+    </div>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+
+      <article class="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="flex items-center justify-between gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-sky-500 text-white shadow-lg shadow-brand-600/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+          </span>
+          <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Expected Dec 2026</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">Ph.D. in Computer Science</h3>
+        <p class="mt-1.5 text-sm font-semibold text-slate-600 dark:text-slate-400">University of Michigan-Flint &nbsp;·&nbsp; Flint, MI</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <span class="font-semibold text-slate-800 dark:text-slate-200">Focus:</span> Brain aneurysm detection, segmentation, and rupture prediction using multimodal imaging and clinical data.
+        </p>
+      </article>
+
+      <article class="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="flex items-center justify-between gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-sky-500 to-teal-400 text-white shadow-lg shadow-sky-500/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+          </span>
+          <span class="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Aug 2020</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">M.S. in Computer Engineering</h3>
+        <p class="mt-1.5 text-sm font-semibold text-slate-600 dark:text-slate-400">Sejong University &nbsp;·&nbsp; Seoul, South Korea</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <span class="font-semibold text-slate-800 dark:text-slate-200">Thesis:</span> Deep learning-based field-of-view selection in 360-degree video.
+        </p>
+      </article>
+
+      <article class="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="flex items-center justify-between gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-violet-500/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+          </span>
+          <span class="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Aug 2018</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">B.S. in Computer Science</h3>
+        <p class="mt-1.5 text-sm font-semibold text-slate-600 dark:text-slate-400">Islamia College University &nbsp;·&nbsp; Peshawar, Pakistan</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          <span class="font-semibold text-slate-800 dark:text-slate-200">Thesis:</span> Raspberry Pi-based CNN-assisted self-driving car.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PUBLICATIONS, PATENTS & SERVICE ============================ -->
+<section id="publications" class="border-t border-slate-200 bg-white py-20 sm:py-24 dark:border-slate-800/80 dark:bg-slate-900/40">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">05 — Research</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Publications, Patents &amp; Conferences</h2>
+      <p class="mt-4 max-w-2xl text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+        Peer-reviewed research across computer vision, edge AI, and medical image analysis, published in IEEE, Elsevier,
+        and Springer venues, alongside granted and pending patents in the United States and South Korea.
+      </p>
+      <a href="https://scholar.google.com/citations?user=MfhBA7EAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"
+         class="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-white">
+        <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+        Full publication list on Google Scholar
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <!-- Selected publications -->
+    <h3 class="reveal mt-12 text-sm font-bold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Selected Publications</h3>
+
+    <div class="mt-5 space-y-4">
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">Journal Article</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2025</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          One-Shot Learning for Generalization in Medical Image Classification Across Modalities
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Irfan, M. et al. <em>Computerized Medical Imaging and Graphics</em>.
+        </p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">Journal Article</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2024</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Federated Fusion Learning with Attention Mechanism for Multi-Client Medical Image Analysis
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Irfan, M. et al. <em>Information Fusion</em>.
+        </p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">Journal Article</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2023</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          StrokeNet: Automated Segmentation and Rupture Risk Prediction of Intracranial Aneurysms
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Irfan, M. et al. <em>Computerized Medical Imaging and Graphics</em>.
+        </p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-sky-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-sky-700 dark:bg-sky-500/10 dark:text-sky-300">IEEE Journal</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2021</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Deep Learning-Based User Field of View Selection in 360-Degree Videos for Industrial Environments
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Irfan, M. et al. <em>IEEE Internet of Things Journal</em>.
+        </p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-sky-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-sky-700 dark:bg-sky-500/10 dark:text-sky-300">IEEE Journal</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2021</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Light-DehazeNet: Lightweight CNN for Single Image Dehazing
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Irfan, M. et al. <em>IEEE Transactions on Image Processing</em>.
+        </p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-sky-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-sky-700 dark:bg-sky-500/10 dark:text-sky-300">IEEE Journal</span>
+          <span class="tabular text-xs font-semibold text-slate-500 dark:text-slate-500">2020</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Efficient and Scalable Simulation Model for Autonomous Vehicles with Economical Hardware
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Sajjad, M., Irfan, M. et al. <em>IEEE Transactions on Intelligent Transportation Systems</em>.
+        </p>
+      </article>
+
+    </div>
+
+    <!-- Patents & intellectual property -->
+    <h3 class="reveal mt-14 text-sm font-bold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Patents &amp; Intellectual Property</h3>
+
+    <div class="mt-5 space-y-4">
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-amber-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">U.S. Provisional — Filed 2026</span>
+          <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Lead Inventor</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          General Motors confidential AI/ML invention
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">U.S. provisional patent application filed in 2026.</p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-amber-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">Trade Secret — 2026</span>
+          <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Lead Inventor</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          General Motors confidential AI/ML innovation
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Retained as a protected trade secret in 2026.</p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-amber-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">U.S. Provisional — Filed 2025</span>
+          <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Lead Inventor</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Adaptive Learning for Multi-Modal Intracranial Aneurysm Rupture Criticality Analysis
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">U.S. Provisional Application No. 30275/70862P.</p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-emerald-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">Granted 2021 — KR</span>
+          <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Lead Inventor</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          User's Field of View Selection Method and Apparatus in 360-Degree Videos
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">KR Patent 10-2284913 B1.</p>
+      </article>
+
+      <article class="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-emerald-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">Granted 2020 — KR</span>
+          <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Lead Inventor</span>
+        </div>
+        <h4 class="mt-3 text-base font-bold leading-snug text-slate-900 dark:text-white">
+          Method and Server for Detecting Abnormal Activity Using Drones
+        </h4>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">KR Patent 10-2168438 B1.</p>
+      </article>
+
+    </div>
+
+    <!-- Professional service & academic engagement -->
+    <div class="reveal mt-14 grid gap-5 lg:grid-cols-2">
+
+      <article class="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-brand-50/50 p-6 shadow-sm dark:border-slate-800 dark:from-slate-900 dark:to-slate-900">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-600 text-white shadow-lg shadow-brand-600/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Professional Service — Peer Review</h3>
+        </div>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Active peer reviewer for top-tier <span class="font-semibold text-slate-800 dark:text-slate-200">IEEE</span>,
+          <span class="font-semibold text-slate-800 dark:text-slate-200">Elsevier</span>, and
+          <span class="font-semibold text-slate-800 dark:text-slate-200">Springer</span> journals in computer vision,
+          artificial intelligence, and medical imaging — evaluating methodological rigor, reproducibility, and clinical validity.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">IEEE journals</li>
+          <li class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">Elsevier journals</li>
+          <li class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">Springer journals</li>
+          <li class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">Computer Vision</li>
+          <li class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">Medical Imaging</li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-teal-50/50 p-6 shadow-sm dark:border-slate-800 dark:from-slate-900 dark:to-slate-900">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal-600 text-white shadow-lg shadow-teal-600/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          </span>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Academic Engagement — Conferences</h3>
+        </div>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Conferences attended and presented at, spanning computer vision, machine learning, and clinical imaging communities.
+        </p>
+        <ul class="mt-5 space-y-3">
+          <li class="flex gap-3 text-[15px] text-slate-600 dark:text-slate-400">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
+            <span><span class="font-semibold text-slate-800 dark:text-slate-200">[Conference Name], [Year]</span> — Presented: [Talk / Poster Title].</span>
+          </li>
+          <li class="flex gap-3 text-[15px] text-slate-600 dark:text-slate-400">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
+            <span><span class="font-semibold text-slate-800 dark:text-slate-200">[Conference Name], [Year]</span> — Presented: [Talk / Poster Title].</span>
+          </li>
+          <li class="flex gap-3 text-[15px] text-slate-600 dark:text-slate-400">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
+            <span><span class="font-semibold text-slate-800 dark:text-slate-200">[Conference Name], [Year]</span> — Attended.</span>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROJECTS ============================ -->
+<section id="projects" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">06 — Projects</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Selected Projects</h2>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+
+      <article class="reveal group flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-start justify-between gap-4">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 text-white shadow-lg shadow-rose-500/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-6.867 8.21 8.21 0 003 2.48z"/></svg>
+          </span>
+          <span class="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Industrial</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">Industrial Thermal Defect Detection</h3>
+        <p class="mt-2.5 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Spatio-temporal analysis of live FLIR thermal streams to flag manufacturing defects in real time, deployed on
+          Jetson edge hardware and integrated into a ROS 2 processing and broadcasting pipeline.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">FLIR</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Spatio-Temporal DL</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Jetson</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">ROS 2</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">TensorRT</li>
+        </ul>
+      </article>
+
+      <article class="reveal group flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-start justify-between gap-4">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-sky-500 text-white shadow-lg shadow-brand-600/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h7.5v7.5h-7.5v-7.5z"/></svg>
+          </span>
+          <span class="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Clinical</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">Multi-Modal Brain Aneurysm Segmentation &amp; Rupture Prediction</h3>
+        <p class="mt-2.5 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Fusion of DSA, MRA, and CT modalities for 3D aneurysm segmentation and rupture-risk prediction, built on a clinical
+          dataset curated and validated with neurosurgeons at Henry Ford Health.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">DSA</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">MRA</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">CT</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">3D Segmentation</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">PyTorch</li>
+        </ul>
+      </article>
+
+      <article class="reveal group flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-start justify-between gap-4">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-lg shadow-teal-500/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+          </span>
+          <span class="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Privacy</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">Privacy-Preserving Medical AI</h3>
+        <p class="mt-2.5 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Federated Learning and one-shot learning architectures that train diagnostic models across institutions without
+          centralizing patient data — addressing both clinical data scarcity and privacy constraints.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Federated Learning</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">One-Shot Learning</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Distributed Systems</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">PyTorch</li>
+        </ul>
+      </article>
+
+      <article class="reveal group flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+        <div class="flex items-start justify-between gap-4">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-violet-500/25">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M18 9.75h.008v.008H18V9.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3 19.5h18a1.5 1.5 0 001.5-1.5V6A1.5 1.5 0 0021 4.5H3A1.5 1.5 0 001.5 6v12A1.5 1.5 0 003 19.5z"/></svg>
+          </span>
+          <span class="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">Edge AI</span>
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">Edge-AI Panoramic Vision &amp; Enhancement</h3>
+        <p class="mt-2.5 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Panoramic image stitching with 3D quality assessment, paired with deep learning dehazing and defogging models
+          optimized to run on resource-constrained edge devices.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Image Stitching</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">3D IQA</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">Dehazing</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">OpenCV</li>
+          <li class="rounded-md bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">CuPy</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section id="contact" class="py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="reveal overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-900 via-slate-900 to-brand-900 p-8 shadow-2xl sm:p-12 dark:border-slate-800">
+      <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-300">07 — Contact</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Let's build something together</h2>
+          <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-slate-300">
+            Open to research collaborations, industry partnerships, and conversations about edge AI, computer vision,
+            and clinical machine learning. Based in Grand Blanc, MI — U.S. Permanent Resident, no sponsorship required.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="https://scholar.google.com/citations?user=MfhBA7EAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
+              Google Scholar
+            </a>
+            <a href="https://www.linkedin.com/in/muhammad-irfan-cv/" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 rounded-xl border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+              Connect on LinkedIn
+            </a>
+            <a href="https://github.com/irfantahir301" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 rounded-xl border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+              View GitHub
+            </a>
+            <a href="mailto:irfantahir301@gmail.com"
+               class="inline-flex items-center gap-2 rounded-xl border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+              Send an email
+            </a>
+          </div>
+        </div>
+
+        <ul class="space-y-3">
+          <li>
+            <a href="mailto:irfantahir301@gmail.com" class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition hover:border-white/25 hover:bg-white/10">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-300">Personal</span>
+              <span class="ml-auto truncate text-sm font-medium text-slate-200">irfantahir301@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:muhammad.irfan@gm.com" class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition hover:border-white/25 hover:bg-white/10">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-300">Work</span>
+              <span class="ml-auto truncate text-sm font-medium text-slate-200">muhammad.irfan@gm.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:irean@umich.com" class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition hover:border-white/25 hover:bg-white/10">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-300">Academic</span>
+              <span class="ml-auto truncate text-sm font-medium text-slate-200">irean@umich.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="border-t border-slate-200 py-8 dark:border-slate-800">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 text-sm text-slate-500 sm:flex-row sm:px-8 dark:text-slate-500">
+    <p>&copy; 2026 Muhammad Irfan. Built with GitHub Pages.</p>
+    <div class="flex items-center gap-5">
+      <a href="https://scholar.google.com/citations?user=MfhBA7EAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" class="transition hover:text-brand-600 dark:hover:text-white">
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/muhammad-irfan-cv/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="transition hover:text-brand-600 dark:hover:text-white">
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
+      <a href="https://github.com/irfantahir301" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="transition hover:text-brand-600 dark:hover:text-white">
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 007.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+      </a>
+      <a href="mailto:irfantahir301@gmail.com" aria-label="Email" class="transition hover:text-brand-600 dark:hover:text-white">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Theme (persisted, respects OS preference) ---------- */
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+
+  function applyTheme(mode) {
+    root.classList.toggle('dark', mode === 'dark');
+  }
+
+  applyTheme(stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var next = root.classList.contains('dark') ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menuToggle = document.getElementById('menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var iconOpen = document.getElementById('icon-open');
+  var iconClose = document.getElementById('icon-close');
+
+  function setMenu(open) {
+    mobileMenu.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+  }
+
+  menuToggle.addEventListener('click', function () {
+    setMenu(mobileMenu.classList.contains('hidden'));
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.mobile-link'), function (link) {
+    link.addEventListener('click', function () { setMenu(false); });
+  });
+
+  /* ---------- Navbar background on scroll ---------- */
+  var navbar = document.getElementById('navbar');
+
+  function onScroll() {
+    var scrolled = window.scrollY > 12;
+    navbar.classList.toggle('bg-white/80', scrolled);
+    navbar.classList.toggle('dark:bg-slate-950/80', scrolled);
+    navbar.classList.toggle('backdrop-blur-lg', scrolled);
+    navbar.classList.toggle('border-slate-200', scrolled);
+    navbar.classList.toggle('dark:border-slate-800', scrolled);
+    navbar.classList.toggle('border-transparent', !scrolled);
+  }
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- Scroll reveal ---------- */
+  var revealItems = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    Array.prototype.forEach.call(revealItems, function (el, i) {
+      el.style.transitionDelay = (i % 4) * 70 + 'ms';
+      revealObserver.observe(el);
+    });
+  } else {
+    Array.prototype.forEach.call(revealItems, function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ---------- Active nav link highlighting ---------- */
+  var navLinks = document.querySelectorAll('.nav-link');
+  var sections = [];
+
+  Array.prototype.forEach.call(navLinks, function (link) {
+    var section = document.querySelector(link.getAttribute('href'));
+    if (section) sections.push({ link: link, section: section });
+  });
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        Array.prototype.forEach.call(navLinks, function (l) { l.classList.remove('active'); });
+        var match = sections.filter(function (s) { return s.section === entry.target; })[0];
+        if (match) match.link.classList.add('active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    sections.forEach(function (s) { sectionObserver.observe(s.section); });
+  }
+
+  /* ---------- Profile photo fallback until assets/profile.jpg exists ---------- */
+  var photo = document.getElementById('profile-photo');
+  var fallback = document.getElementById('profile-fallback');
+
+  photo.addEventListener('error', function () {
+    photo.classList.add('hidden');
+    fallback.classList.remove('hidden');
+    fallback.classList.add('grid');
+  });
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Card spotlight follows the cursor ---------- */
+  var cards = document.querySelectorAll('#skills article, #projects article, #publications article');
+
+  Array.prototype.forEach.call(cards, function (card) {
+    card.classList.add('card-spotlight');
+
+    card.addEventListener('pointermove', function (event) {
+      var rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((event.clientX - rect.left) / rect.width) * 100 + '%');
+      card.style.setProperty('--my', ((event.clientY - rect.top) / rect.height) * 100 + '%');
+    });
+  });
+
+  /* ---------- Count-up statistics ---------- */
+  var counters = document.querySelectorAll('[data-count]');
+
+  function runCounter(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 1500;
+    var startTime = null;
+
+    function tick(now) {
+      if (startTime === null) startTime = now;
+      var progress = Math.min((now - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        counterObserver.unobserve(entry.target);
+        runCounter(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    Array.prototype.forEach.call(counters, function (el) {
+      el.textContent = '0' + (el.getAttribute('data-suffix') || '');
+      counterObserver.observe(el);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
